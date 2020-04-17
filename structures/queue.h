@@ -62,7 +62,7 @@ public:
         }
     };
 
-	int pop(){
+	void pop(){
 	    try{
 	        if(!empty()){
                 int x = data[0];
@@ -70,7 +70,7 @@ public:
 	                data[i]=data[i+1];
 	            }
 	            top--;
-                cout << x << " removed" << endl;
+                cout << x << " removed, data[0]: " << front()<< endl;
 	        }else {
 	            throw logic_error("Stack Vacio");
 	        }
