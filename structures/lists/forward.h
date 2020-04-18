@@ -10,6 +10,14 @@ class ForwardList : public List<T> {
     public:
         ForwardList() : List<T>() {}
 
+        void swap( T& a, T & b){
+            T max;
+            max = a;
+            a = b;
+            b = max;
+
+        }
+
         T front(){
             try {
                 if (empty()) {
@@ -55,16 +63,14 @@ class ForwardList : public List<T> {
         void push_back(T data){
             auto newNode = new Node<T>;
             newNode->data = data;
+            newNode->next = nullptr;
+            newNode->prev = nullptr;
 
             if(empty()){
                 this->head = newNode;
                 this->tail = newNode;
-                newNode->next = nullptr;
-                newNode->prev = nullptr;
             } else{
-                newNode->prev = nullptr;
                 this->tail->next = newNode;
-                newNode->next = nullptr;
                 this->tail = newNode;
             }
             this->nodes++;
@@ -127,7 +133,26 @@ class ForwardList : public List<T> {
                 cout<<e.what()<<endl;
             }
         };
-        T operator[](int);
+        T operator[](int posicion){
+            try{
+                if(empty()){
+                    throw logic_error("Empty");
+                } else if (posicion < 0 || posicion >= this->nodes){
+                    throw logic_error("Rango invalido");
+                } else {
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    for(int i = 0; i < posicion; ++i){
+                        tmp = tmp->next;
+                    }
+                    return tmp->data;
+                }
+
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
         bool empty(){
             if(this->head == nullptr && this->tail == nullptr){
                 return true;
@@ -136,16 +161,8 @@ class ForwardList : public List<T> {
             }
         };
         int size(){
-            try {
-                if (empty()) {
-                    throw logic_error("Empty");//RETORNAR 0 O EXCEPCION ??
-                } else {
-                    return this->nodes;
-                }
-            }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
+
+            return this->nodes;
         };
 
         void clear(){
@@ -153,15 +170,9 @@ class ForwardList : public List<T> {
                 if(empty()){
                     throw logic_error("Empty");
                 } else{
-                    auto tmp = new Node<T>;
-                    while(this->head){
-                        tmp = this->head;
-                        this->head = this->head->next;
-                        delete tmp;
-                        this->nodes--;
-                    }
+                    this->head->killSelf();
                     this->head = this->tail = nullptr;
-
+                    this->nodes = 0;
                 }
             }
             catch (std::exception& e){
@@ -169,11 +180,66 @@ class ForwardList : public List<T> {
             }
 
         };
-        void sort();
-        void reverse();
+        void sort(){
+            try{
+                if(empty()){
+                    throw logic_error("Empty");
+                }else if (this->nodes == 1){
+                    return;
+                }else{
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    for(int i = 0; i < this->nodes; ++i){
+                        while(tmp->next != this->tail->next){
+                            if(tmp->data > tmp->next->data){
+                                swap(tmp->data,tmp->next->data);
+                            }
+                            tmp = tmp->next;
+                        }
+                        tmp = this->head;
+                    }
+                    delete tmp;
 
-        ForwardIterator<T> begin();
-	    ForwardIterator<T> end();
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        void reverse() {
+            try {
+
+                if (this->empty()) {
+                    throw logic_error("Empty");
+                } else if (this->head->next == nullptr) {
+                    throw logic_error("1 nodo");
+                } else{
+                    auto tmp = new Node <T>;
+                    tmp = this->head;
+                    Node<T>*prev = nullptr;
+                    Node<T>*next = nullptr;
+                    while (tmp != nullptr) {
+                        next = tmp->next;
+                        tmp->next = prev;
+                        prev = tmp;
+                        tmp = next;
+                    }
+                    this->tail = this->head;
+                    this->head = prev;
+                    delete tmp;
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+
+        ForwardIterator<T> begin(){
+            return ForwardIterator<T>(this->head);
+        };
+	    ForwardIterator<T> end(){
+	        return ForwardIterator<T>(this->tail->next);
+	    };
 
         string name() {
             return "Forward List";
@@ -189,7 +255,7 @@ class ForwardList : public List<T> {
          * any element: they are transferred, no matter whether x is an lvalue or an rvalue, 
          * or whether the value_type supports move-construction or not.
         */
-        void merge(ForwardList<T>&);
+        //void merge(ForwardList<T>&);
 };
 
 #endif

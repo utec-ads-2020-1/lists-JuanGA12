@@ -9,12 +9,16 @@
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/main.cpp
 iostream
 -
-test/tester.h
-/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/test/tester.h
+test/tester.cpp
+/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/test/tester.cpp
 structures/stack.h
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/stack.h
 structures/queue.h
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/queue.h
+
+/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/mock/mocker.cpp
+mocker.h
+/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/mock/mocker.h
 
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/mock/mocker.h
 random
@@ -62,6 +66,10 @@ node.h
 iostream
 -
 
+/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/test/tester.cpp
+tester.h
+/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/test/tester.h
+
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/test/tester.h
 stdexcept
 -
@@ -69,8 +77,8 @@ iostream
 -
 assert.h
 -
-../mock/mocker.h
-/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/mock/mocker.h
+../mock/mocker.cpp
+/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/mock/mocker.cpp
 ../structures/lists/forward.h
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/forward.h
 ../structures/lists/linked.h

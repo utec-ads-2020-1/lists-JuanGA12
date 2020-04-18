@@ -12,7 +12,25 @@ class CircularLinkedList : public List<T> {
 
         T front();
         T back();
-        void push_front(T);
+        void push_front(T data){
+
+            auto newNode = new Node<T>;
+            newNode->data = data;
+
+            if(empty()){
+                this->head = newNode;
+                this->tail = newNode;
+                newNode->next = nullptr;
+                newNode->prev = nullptr;
+            } else{
+                newNode->next = this->head;
+                this->head->prev = nullptr;
+                newNode->prev = nullptr;
+                this->head = newNode;
+            }
+            this->nodes++;
+            this->tail->next = this->head;
+        };
         void push_back(T);
         void pop_front();
         void pop_back();

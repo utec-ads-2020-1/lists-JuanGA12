@@ -130,9 +130,24 @@ class LinkedList : public List<T> {
             }
         };
         T operator[](int posicion){
-            auto tmp = new Node<T>;
-            tmp = this->head->next;
-            return tmp->data;
+            try{
+                if(empty()){
+                    throw logic_error("Empty");
+                } else if (posicion < 0 || posicion >= this->nodes){
+                    throw logic_error("Rango invalido");
+                } else {
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    for(int i = 0; i < posicion; ++i){
+                        tmp = tmp->next;
+                    }
+                    return tmp->data;
+                }
+
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
         };
 
         bool empty(){
@@ -159,26 +174,22 @@ class LinkedList : public List<T> {
                 if(empty()){
                     throw logic_error("Empty");
                 }else{
-                    auto tmp = new Node<T>;
-                    while(this->head){
-                        tmp = this->head;
-                        this->head = this->head->next;
-                        delete tmp;
-                        this->nodes--;
-                    }
+                    this->head->killSelf();
                     this->head = this->tail = nullptr;
-
+                    this->nodes = 0;
                 }
             }
             catch (std::exception& e){
                 cout<<e.what()<<endl;
             }
         };
-        void sort();
-        void reverse();
+        //void sort(){
 
-        BidirectionalIterator<T> begin();
-	    BidirectionalIterator<T> end();
+        //};
+        //void reverse();
+
+        //BidirectionalIterator<T> begin();
+	    //BidirectionalIterator<T> end();
 
         string name() {
             return "Linked List";

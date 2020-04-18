@@ -3,6 +3,7 @@
 
 CMakeFiles/lists_JuanGA12.dir/main.cpp.o
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/main.cpp
+ /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/mock/mocker.cpp
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/mock/mocker.h
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/circular.h
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/forward.h
@@ -13,4 +14,5 @@ CMakeFiles/lists_JuanGA12.dir/main.cpp.o
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/node.h
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/queue.h
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/stack.h
+ /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/test/tester.cpp
  /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/test/tester.h

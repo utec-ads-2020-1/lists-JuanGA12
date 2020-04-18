@@ -25,9 +25,10 @@ class List {
         virtual bool empty() = 0;
         virtual int size() = 0;
         virtual void clear() = 0;
-        //virtual void sort() = 0;
-        //virtual void reverse() = 0;
+        virtual void sort() = 0;
+        virtual void reverse() = 0;
         virtual string name() = 0;
+
 
 };
 
