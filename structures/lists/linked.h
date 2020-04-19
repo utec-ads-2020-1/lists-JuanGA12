@@ -11,6 +11,13 @@ class LinkedList : public List<T> {
     public:
         LinkedList() : List<T>() {}
 
+        void swap( T& a, T & b){
+            T max;
+            max = a;
+            a = b;
+            b = max;
+        }
+
         T front(){
             try {
                 if (empty()) {
@@ -158,16 +165,7 @@ class LinkedList : public List<T> {
             }
         };
         int size(){
-            try {
-                if (empty()) {
-                    throw logic_error("Empty");//RETORNAR 0 O EXCEPCION??
-                } else {
-                    return this->nodes;
-                }
-            }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
+            return this->nodes;
         };
         void clear(){
             try{
@@ -183,13 +181,69 @@ class LinkedList : public List<T> {
                 cout<<e.what()<<endl;
             }
         };
-        //void sort(){
+        void sort(){
+            try{
+                if(empty()){
+                    throw logic_error("Empty");
+                }else if (this->nodes == 1){
+                    return;
+                }else{
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    for(int i = 0; i < this->nodes; ++i){
+                        while(tmp->next != this->tail->next){
+                            if(tmp->data > tmp->next->data){
+                                swap(tmp->data,tmp->next->data);
+                            }
+                            tmp = tmp->next;
+                        }
+                        tmp = this->head;
+                    }
+                    delete tmp;
 
-        //};
-        //void reverse();
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        void reverse(){
+            try {
 
-        //BidirectionalIterator<T> begin();
-	    //BidirectionalIterator<T> end();
+                if (this->empty()) {
+                    throw logic_error("Empty");
+                } else if (this->head->next == nullptr) {
+                    throw logic_error("1 nodo");
+                } else{
+                    auto tmp = new Node <T>;
+                    tmp = this->head;
+                    Node<T>* tmp2 = nullptr;
+
+                    while (tmp != nullptr) {
+                        tmp2 = tmp->prev;
+                        tmp->prev = tmp->next;
+                        tmp->next = tmp2;
+                        tmp = tmp->prev;
+                    }
+                    auto tmp3 = this->head;
+                    this->head = this->tail;
+                    this->tail = tmp3;
+                    delete tmp;
+                    delete tmp3;
+                }
+
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+
+        BidirectionalIterator<T> begin(){
+            return BidirectionalIterator<T> (this->head);
+        };
+	    BidirectionalIterator<T> end(){
+            return BidirectionalIterator<T> (this->tail->next);
+	    };
 
         string name() {
             return "Linked List";
@@ -205,7 +259,24 @@ class LinkedList : public List<T> {
          * any element: they are transferred, no matter whether x is an lvalue or an rvalue, 
          * or whether the value_type supports move-construction or not.
         */
-        void merge(LinkedList<T>&);
+        void merge(LinkedList<T>& LinkedList){
+            try {
+                if(LinkedList.empty() && this->empty()){
+                    throw logic_error("Empty");
+                }else {
+                    auto tmp = LinkedList.head;
+                    while (tmp != nullptr) {
+                        push_back(tmp->data);
+                        tmp = tmp->next;
+                    }
+                    LinkedList.clear();//removes all the elements in x (which becomes empty)
+                    //this->sort(); al ordenar toda la nueva lista, no pasa el test.
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
 };
 
 #endif

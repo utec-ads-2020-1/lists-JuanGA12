@@ -27,7 +27,7 @@ using namespace std;
 
 #define NUMBER_OF_TESTS 10
 
-enum Collection { forward_list };
+enum Collection { forward_list, linked_list };
 
 class Tester {
     private:
@@ -48,10 +48,10 @@ class Tester {
 
         template <typename T>
         static void testForward(ForwardList<T>*);
-/*
+
         template <typename T>
         static void testLinked(LinkedList<T>*);
-
+/*
         template <typename T>
         static void testCircularLinked(CircularLinkedList<T>*);
 */

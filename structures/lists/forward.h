@@ -189,7 +189,7 @@ class ForwardList : public List<T> {
                 }else{
                     auto tmp = new Node<T>;
                     tmp = this->head;
-                    for(int i = 0; i < this->nodes; ++i){
+                    for(int i = 0; i < this->nodes; i++){
                         while(tmp->next != this->tail->next){
                             if(tmp->data > tmp->next->data){
                                 swap(tmp->data,tmp->next->data);
@@ -219,6 +219,7 @@ class ForwardList : public List<T> {
                     Node<T>*prev = nullptr;
                     Node<T>*next = nullptr;
                     while (tmp != nullptr) {
+
                         next = tmp->next;
                         tmp->next = prev;
                         prev = tmp;
@@ -255,8 +256,26 @@ class ForwardList : public List<T> {
          * any element: they are transferred, no matter whether x is an lvalue or an rvalue, 
          * or whether the value_type supports move-construction or not.
         */
-        //void merge(ForwardList<T>&);
+        void merge(ForwardList<T>& ForwardList){
+            try {
+                if(ForwardList.empty() && this->empty()){
+                    throw logic_error("Empty");
+                }else {
+                    auto tmp = ForwardList.head;
+                    while (tmp != nullptr) {
+                        push_back(tmp->data);
+                        tmp = tmp->next;
+                    }
+                    ForwardList.clear();//removes all the elements in x (which becomes empty)
+                    //this->sort(); al ordenar toda la nueva lista, no pasa el test.
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+
+        };
+
 };
 
 #endif
-
