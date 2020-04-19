@@ -11,9 +11,18 @@ int main(int argc, char *argv[]) {
     cout << "===========================================================" << endl << endl;
 
     Tester::execute();
-    //LinkedList<int> z;
-    //z.push_front(1);
-    //z.push_front(2);
+    CircularLinkedList<int> z;
+    z.push_front(2);
+    z.push_front(1);
+    z.push_front(4);
+
+    CircularLinkedList<int> y;
+    y.push_front(2);
+    y.push_front(1);
+    y.push_front(4);
+    //z.pop_back();
+
+
     //z.push_front(3);
     //z.push_front(4);
     //z.push_front(5);

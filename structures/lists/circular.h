@@ -10,8 +10,38 @@ class CircularLinkedList : public List<T> {
     public:
         CircularLinkedList() : List<T>() {}
 
-        T front();
-        T back();
+        void swap( T& a, T & b){
+             T max;
+             max = a;
+             a = b;
+             b = max;
+        }
+
+        T front(){
+            try {
+                if (empty()) {
+                    throw logic_error("Empty");
+                } else {
+                    return this->head->data;
+                }
+            }
+
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        T back(){
+            try {
+                if (empty()) {
+                    throw logic_error("Empty");
+                } else {
+                    return this->tail->data;
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
         void push_front(T data){
 
             auto newNode = new Node<T>;
@@ -20,29 +50,157 @@ class CircularLinkedList : public List<T> {
             if(empty()){
                 this->head = newNode;
                 this->tail = newNode;
-                newNode->next = nullptr;
-                newNode->prev = nullptr;
+                newNode->next = this->head;
+                newNode->prev = this->tail;
             } else{
                 newNode->next = this->head;
-                this->head->prev = nullptr;
-                newNode->prev = nullptr;
+                this->head->prev = newNode;
+                newNode->prev = this->tail;
                 this->head = newNode;
             }
             this->nodes++;
-            this->tail->next = this->head;
         };
-        void push_back(T);
-        void pop_front();
-        void pop_back();
-        T operator[](int);
-        bool empty();
-        int size();
-        void clear();
-        void sort();
-        void reverse();
+        void push_back(T data){
+            auto newNode = new Node<T>;
+            newNode->data = data;
 
-        BidirectionalIterator<T> begin();
-	    BidirectionalIterator<T> end();
+            if(empty()){
+                this->head = newNode;
+                this->tail = newNode;
+                newNode->next = this->head;
+                newNode->prev = this->tail;
+            } else{
+                newNode->prev = this->tail;
+                this->tail->next = newNode;
+                newNode->next = this->tail;
+                this->tail = newNode;
+            }
+            this->nodes++;
+        };
+        void pop_front(){
+            try {
+                if (empty()) {
+                    throw logic_error("Empty");
+
+                } else if (this->head == this->tail){
+
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    this->head = nullptr;
+                    this->tail = nullptr;
+                    delete tmp;
+
+                } else{
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    this->head = this->head->next;
+                    this->tail->next = this->head;
+                    this->head->prev = this->tail;
+                    delete tmp;
+
+                }
+                this->nodes--;
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        void pop_back(){
+            try {
+                if (empty()) {
+                    throw logic_error("Empty");
+
+                } else if (this->head == this->tail){
+
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    this->head = nullptr;
+                    this->tail = nullptr;
+                    delete tmp;
+
+                } else{
+                    auto tmp = new Node<T>;
+                    tmp = this->tail;
+                    this->tail = this->tail->prev;
+                    this->tail->next = this->head;
+                    this->head->prev = this->tail;
+                    delete tmp;
+
+                }
+                this->nodes--;
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        T operator[](int posicion){
+            try{
+                if(empty()){
+                    throw logic_error("Empty");
+                } else if (posicion < 0 || posicion >= this->nodes){
+                    throw logic_error("Rango invalido");
+                } else {
+                    auto tmp = new Node<T>;
+                    tmp = this->head;
+                    for(int i = 0; i < posicion; ++i){
+                        tmp = tmp->next;
+                    }
+                    return tmp->data;
+                }
+
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        bool empty(){
+            if(this->head == nullptr && this->tail == nullptr){
+                return true;
+            }else{
+                return false;
+            }
+        };
+        int size(){
+            return this->nodes;
+        };
+        void clear(){
+            try{
+                if(empty()){
+                    throw logic_error("Empty");
+                }else{
+                    this->head->killSelf();
+                    this->head = this->tail = nullptr;
+                    this->nodes = 0;
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        void sort(){
+            try{
+                if(empty()){
+                    throw logic_error("Empty");
+                }else if (this->nodes == 1){
+                    return;
+                }else{
+
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
+        void reverse(){
+            
+        };
+
+        BidirectionalIterator<T> begin(){
+            return BidirectionalIterator<T> (this->head);
+        };
+	    BidirectionalIterator<T> end(){
+            return BidirectionalIterator<T> (this->tail->next);
+	    };
 
         string name() {
             return "Circular Linked List";
@@ -58,7 +216,18 @@ class CircularLinkedList : public List<T> {
          * any element: they are transferred, no matter whether x is an lvalue or an rvalue, 
          * or whether the value_type supports move-construction or not.
         */
-        void merge(CircularLinkedList<T>&);
+        void merge(CircularLinkedList<T>& CircularLinkedList){
+            try {
+                if(CircularLinkedList.empty() && this->empty()){
+                    throw logic_error("Empty");
+                }else {
+
+                }
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
+        };
 };
 
 #endif

@@ -215,21 +215,20 @@ class LinkedList : public List<T> {
                 } else if (this->head->next == nullptr) {
                     throw logic_error("1 nodo");
                 } else{
-                    auto tmp = new Node <T>;
-                    tmp = this->head;
-                    Node<T>* tmp2 = nullptr;
+                    auto current = new Node <T>;
+                    current = this->head;
+                    Node<T>* tmp = nullptr;
 
-                    while (tmp != nullptr) {
-                        tmp2 = tmp->prev;
-                        tmp->prev = tmp->next;
-                        tmp->next = tmp2;
-                        tmp = tmp->prev;
+                    while (current != nullptr) {
+                        tmp = current->prev;
+                        current->prev = current->next;
+                        current->next = tmp;
+                        current = current->prev;
                     }
-                    auto tmp3 = this->head;
+                    auto new_tail = this->head;
                     this->head = this->tail;
-                    this->tail = tmp3;
+                    this->tail = new_tail;
                     delete tmp;
-                    delete tmp3;
                 }
 
             }
