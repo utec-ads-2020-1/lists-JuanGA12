@@ -168,6 +168,8 @@ class CircularLinkedList : public List<T> {
                 if(empty()){
                     throw logic_error("Empty");
                 }else{
+                    this->head->prev = nullptr;
+                    this->tail->next = nullptr;
                     this->head->killSelf();
                     this->head = this->tail = nullptr;
                     this->nodes = 0;
@@ -184,6 +186,22 @@ class CircularLinkedList : public List<T> {
                 }else if (this->nodes == 1){
                     return;
                 }else{
+                    auto tmp = new Node<T>;
+                    this->head->prev = nullptr;
+                    this->tail->next = nullptr;
+                    tmp = this->head;
+                    for(int i = 0; i < this->nodes; ++i){
+                        while(tmp->next != this->tail->next){
+                            if(tmp->data > tmp->next->data){
+                                swap(tmp->data,tmp->next->data);
+                            }
+                            tmp = tmp->next;
+                        }
+                        tmp = this->head;
+                    }
+                    delete tmp;
+                    this->head->prev = this->tail;
+                    this->tail->next = this->head;
 
                 }
             }
@@ -192,6 +210,37 @@ class CircularLinkedList : public List<T> {
             }
         };
         void reverse(){
+            try {
+
+                if (this->empty()) {
+                    throw logic_error("Empty");
+                } else if (this->head->next == nullptr) {
+                    throw logic_error("1 nodo");
+                } else{
+                    auto current = new Node <T>;
+                    this->head->prev = nullptr;
+                    this->tail->next = nullptr;
+                    current = this->head;
+                    Node<T>* tmp = nullptr;
+
+                    while (current != nullptr) {
+                        tmp = current->prev;
+                        current->prev = current->next;
+                        current->next = tmp;
+                        current = current->prev;
+                    }
+                    auto new_tail = this->head;
+                    this->head = this->tail;
+                    this->tail = new_tail;
+                    delete tmp;
+                    this->head->prev = this->tail;
+                    this->tail->next = this->head;
+                }
+
+            }
+            catch (std::exception& e){
+                cout<<e.what()<<endl;
+            }
             
         };
 
@@ -221,7 +270,17 @@ class CircularLinkedList : public List<T> {
                 if(CircularLinkedList.empty() && this->empty()){
                     throw logic_error("Empty");
                 }else {
-
+                    CircularLinkedList.head->prev= nullptr;
+                    CircularLinkedList.tail->next= nullptr;
+                    auto tmp = CircularLinkedList.head;
+                    while (tmp != nullptr) {
+                        push_back(tmp->data);
+                        tmp = tmp->next;
+                    }
+                    CircularLinkedList.clear();//removes all the elements in x (which becomes empty)
+                    //this->sort(); al ordenar toda la nueva lista, no pasa el test.
+                    this->head->prev = this->tail;
+                    this->tail->next = this->head;
                 }
             }
             catch (std::exception& e){

@@ -3,7 +3,6 @@
 
 #include "list.h"
 #include "iterators/bidirectional_iterator.h"
-#include "list.h"
 
 // TODO: Implement all methods
 template <typename T>
