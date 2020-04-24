@@ -2,6 +2,7 @@
 #define FORWARD_ITERATOR_H
 
 #include "../node.h"
+#include "../forward.h"
 
 // TODO: Implement all methods
 template <typename T> 

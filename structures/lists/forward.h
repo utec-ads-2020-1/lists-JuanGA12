@@ -10,38 +10,27 @@ class ForwardList : public List<T> {
     public:
         ForwardList() : List<T>() {}
 
-        void swap( T& a, T & b){
+        void swap( T& a, T& b){
             T max;
             max = a;
             a = b;
             b = max;
-
         }
 
         T front(){
-            try {
-                if (empty()) {
-                    throw logic_error("Empty");
-                } else {
-                    return this->head->data;
-                }
-            }
-
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
+            if (empty()) {
+                throw logic_error("Empty");
+            } else {
+                return this->head->data;
             }
         };
         T back(){
-            try {
-                if (empty()) {
-                    throw logic_error("Empty");
-                } else {
-                    return this->tail->data;
-                }
+            if (empty()) {
+                throw logic_error("Empty");
+            } else {
+                return this->tail->data;
             }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
+
         };
         void push_front(T data){
             auto newNode = new Node<T>;
@@ -76,162 +65,119 @@ class ForwardList : public List<T> {
             this->nodes++;
         };
         void pop_front(){
-            try {
-                if (empty()) {
-                    throw logic_error("Empty");
+            if (empty()) {
+                throw logic_error("Empty");
 
-                } else if (this->head == this->tail){
+            } else if (this->head == this->tail){
+                 auto tmp = this->head;
+                 this->head = nullptr;
+                 this->tail = nullptr;
+                 delete tmp;
+            } else{
+                auto tmp = this->head;
+                this->head = this->head->next;
+                this->head->prev = nullptr;
+                delete tmp;
 
-                    auto tmp = new Node<T>;
-                    tmp = this->head;
-                    this->head = nullptr;
-                    this->tail = nullptr;
-                    delete tmp;
-
-                } else{
-                    auto tmp = new Node<T>;
-                    tmp = this->head;
-                    this->head = this->head->next;
-                    this->head->prev = nullptr;
-                    delete tmp;
-
-                }
-                this->nodes--;
             }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
+            this->nodes--;
         };
         void pop_back(){
-            try {
-                if (empty()) {
-                    throw logic_error("Empty");
+            if (empty()) {
+                throw logic_error("Empty");
 
-                } else if (this->head == this->tail){
+            } else if (this->head == this->tail){
 
-                    auto tmp = new Node<T>;
-                    tmp = this->head;
-                    this->head = nullptr;
-                    this->tail = nullptr;
-                    delete tmp;
+                auto tmp = this->head;
+                this->head = nullptr;
+                this->tail = nullptr;
+                delete tmp;
 
-                } else{
+            } else{
 
-                    auto tmp = new Node<T>;
-                    tmp = this->head;
-                    while(tmp->next != this->tail ){
-                        tmp = tmp->next;
-                    }
-                    //delete this->tail;
-                    this->tail = tmp;
-                    this->tail->next = nullptr;
-                    delete tmp;
+                auto tmp = this->head;
+                while(tmp->next != this->tail ){
+                    tmp = tmp->next;
                 }
-                this->nodes--;
+                //delete this->tail;
+                this->tail = tmp;
+                this->tail->next = nullptr;
+                delete tmp;
             }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
+            this->nodes--;
         };
         T operator[](int posicion){
-            try{
-                if(empty()){
-                    throw logic_error("Empty");
-                } else if (posicion < 0 || posicion >= this->nodes){
-                    throw logic_error("Rango invalido");
-                } else {
-                    auto tmp = new Node<T>;
-                    tmp = this->head;
-                    for(int i = 0; i < posicion; ++i){
-                        tmp = tmp->next;
-                    }
-                    return tmp->data;
+            if(empty()){
+                throw logic_error("Empty");
+            } else if (posicion < 0 || posicion >= this->nodes){
+                throw logic_error("Rango invalido");
+            } else {
+                auto tmp = new Node<T>;
+                tmp = this->head;
+                for(int i = 0; i < posicion; ++i){
+                    tmp = tmp->next;
                 }
+                return tmp->data;
+            }
 
-            }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
         };
         bool empty(){
-            if(this->head == nullptr && this->tail == nullptr){
-                return true;
-            }else{
-                return false;
-            }
+            return this->nodes == 0;
         };
         int size(){
-
             return this->nodes;
         };
 
         void clear(){
-            try {
-                if(empty()){
-                    throw logic_error("Empty");
-                } else{
-                    this->head->killSelf();
-                    this->head = this->tail = nullptr;
-                    this->nodes = 0;
-                }
+            if(empty()){
+                throw logic_error("Empty");
+            } else{
+                this->head->killSelf();
+                this->head = this->tail = nullptr;
+                this->nodes = 0;
             }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
-
         };
         void sort(){
-            try{
-                if(empty()){
-                    throw logic_error("Empty");
-                }else if (this->nodes == 1){
-                    return;
-                }else{
-                    auto tmp = new Node<T>;
-                    tmp = this->head;
-                    for(int i = 0; i < this->nodes; i++){
-                        while(tmp->next != this->tail->next){
-                            if(tmp->data > tmp->next->data){
-                                swap(tmp->data,tmp->next->data);
-                            }
-                            tmp = tmp->next;
-                        }
-                        tmp = this->head;
-                    }
-                    delete tmp;
 
+            if(empty()){
+                throw logic_error("Empty");
+            }else if (this->nodes == 1){
+                return;
+            }else{
+                auto tmp = this->head;
+                for(int i = 0; i < this->nodes; i++){
+                    while(tmp->next != this->tail->next){
+                        if(tmp->data > tmp->next->data){
+                            swap(tmp->data,tmp->next->data);
+                        }
+                        tmp = tmp->next;
+                    }
+                    tmp = this->head;
                 }
+                delete tmp;
             }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
+
         };
         void reverse() {
-            try {
 
-                if (this->empty()) {
-                    throw logic_error("Empty");
-                } else if (this->head->next == nullptr) {
-                    throw logic_error("1 nodo");
-                } else{
-                    auto tmp = new Node <T>;
-                    tmp = this->head;
-                    Node<T>*prev = nullptr;
-                    Node<T>*next = nullptr;
-                    while (tmp != nullptr) {
+            if (this->empty()) {
+                throw logic_error("Empty");
+            } else if (this->head->next == nullptr) {
+                throw logic_error("1 nodo");
+            } else{
+                auto tmp = this->head;
+                Node<T>*prev = nullptr;
+                Node<T>*next = nullptr;
+                while (tmp != nullptr) {
 
-                        next = tmp->next;
-                        tmp->next = prev;
-                        prev = tmp;
-                        tmp = next;
-                    }
-                    this->tail = this->head;
-                    this->head = prev;
-                    delete tmp;
+                    next = tmp->next;
+                    tmp->next = prev;
+                    prev = tmp;
+                    tmp = next;
                 }
-            }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
+                this->tail = this->head;
+                this->head = prev;
+                delete tmp;
             }
         };
 
@@ -257,23 +203,18 @@ class ForwardList : public List<T> {
          * or whether the value_type supports move-construction or not.
         */
         void merge(ForwardList<T>& ForwardList){
-            try {
-                if(ForwardList.empty() && this->empty()){
-                    throw logic_error("Empty");
-                }else {
-                    auto tmp = ForwardList.head;
-                    while (tmp != nullptr) {
-                        push_back(tmp->data);
-                        tmp = tmp->next;
-                    }
-                    ForwardList.clear();//removes all the elements in x (which becomes empty)
-                    //this->sort(); al ordenar toda la nueva lista, no pasa el test.
-                }
-            }
-            catch (std::exception& e){
-                cout<<e.what()<<endl;
-            }
 
+            if(ForwardList.empty() && this->empty()){
+                throw logic_error("Empty");
+            }else {
+                auto tmp = ForwardList.head;
+                while (tmp != nullptr) {
+                    push_back(tmp->data);
+                    tmp = tmp->next;
+                }
+                ForwardList.clear();//removes all the elements in x (which becomes empty)
+                    //this->sort(); al ordenar toda la nueva lista, no pasa el test.
+            }
         };
 
 };

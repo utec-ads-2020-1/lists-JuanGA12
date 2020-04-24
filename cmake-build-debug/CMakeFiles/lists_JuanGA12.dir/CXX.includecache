@@ -45,6 +45,8 @@ iterators/forward_iterator.h
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/iterators/forward_iterator.h
 ../node.h
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/node.h
+../forward.h
+/Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/forward.h
 
 /Users/Juan Galvez/Desktop/5to Ciclo/Algoritmos/lists-JuanGA12/structures/lists/linked.h
 list.h
