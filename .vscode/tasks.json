@@ -8,7 +8,8 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-g", "main.cpp", "mock/mocker.cpp", "test/tester.cpp",
+                "-std=c++14",
+                "-g", "main.cpp", 
                 "-o", "lists.out"
             ],
             "group": {

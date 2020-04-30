@@ -21,7 +21,7 @@ public:
 	};
 	~queue(){
 	    delete []data;
-	    data = nullptr;
+	    data = nullptr; // No es necesario
 	};
 
 	void push(T x){

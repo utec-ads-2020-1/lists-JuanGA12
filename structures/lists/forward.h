@@ -209,6 +209,7 @@ class ForwardList : public List<T> {
             }else {
                 auto tmp = ForwardList.head;
                 while (tmp != nullptr) {
+                    // No es la idea
                     push_back(tmp->data);
                     tmp = tmp->next;
                 }

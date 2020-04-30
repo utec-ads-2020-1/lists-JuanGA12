@@ -60,7 +60,7 @@ public:
         }
 	};
 	void pop(){
-	    try {
+	    try {// Esto no debería estar
 
             if (empty()) {
                 throw logic_error ("Stack Vacio");
@@ -75,7 +75,7 @@ public:
 
 	};
 	T peak(){
-        try {
+        try {// Esto no debería estar
             if(!empty()){
 	        return data[top];
 	        } else {
